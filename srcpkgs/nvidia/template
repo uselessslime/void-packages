@@ -255,8 +255,10 @@ do_install() {
 
 nvidia-gtklibs_package() {
 	short_desc="${_desc} - GTK+ libraries"
+        build_options="gtk3"
+        build_options_default=""
 	pkg_install() {
-		vmove usr/lib/lib*gtk*.so*
+		vmove usr/lib/lib*gtk$(vopt_if gtk3 3 2).so*
 	}
 }
 nvidia-libs_package() {

@@ -2,4 +2,6 @@ XBPS_ALLOW_RESTRICTED=yes
 XBPS_INSTALL_ARGS="--repository=https://repo.voidlinux.eu/current"
 XBPS_USE_GIT_REVS=yes
 XBPS_PKG_OPTIONS=~gtk3,~pulseaudio
-#XBPS_PKG_OPTIONS_foo=opt,~opt2,opt3,~opt4
+XBPS_PKG_OPTIONS_firefox-esr=~rust,~startup_notification
+#,~pulseaudio,~gt3
+XBPS_PKG_OPTIONS_base-system=~art,~man
