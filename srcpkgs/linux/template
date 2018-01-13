@@ -8,9 +8,14 @@ short_desc="The Linux kernel meta package"
 maintainer="Juan RP <xtraeme@voidlinux.eu>"
 license="Public Domain"
 
+build_options="amd intel nvidia"
+build_options_default="intel"
+
 case "$XBPS_TARGET_MACHINE" in
 	i686*|x86_64*)
-		depends="linux${version} linux-firmware-amd linux-firmware-intel linux-firmware-nvidia linux-firmware-network dracut"
+		depends="linux${version} $(vopt_if amd linux-firmware-amd) \
+                $(vopt_if intel linux-firmware-intel)  $(vopt_if nvidia linux-firmware-nvidia) \
+	        linux-firmware-network dracut"
 		_depends_headers="linux${version}-headers"
 		;;
 	arm*|aarch64*)

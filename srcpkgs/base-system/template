@@ -8,13 +8,18 @@ short_desc="Void Linux base system meta package"
 maintainer="Juan RP <xtraeme@voidlinux.eu>"
 license="Public domain"
 
+build_options="wifi ext btrfs xfs f2fs vfat man art"
+build_options_default="ext vfat man art"
+
 depends="
  base-files>=0.77 ncurses coreutils findutils diffutils libgcc
- dash bash grep gzip file sed gawk less util-linux which tar man-pages
- mdocml>=1.13.3 shadow e2fsprogs btrfs-progs xfsprogs f2fs-tools dosfstools
+ dash bash grep gzip file sed gawk less util-linux which tar 
+ $(vopt_if man "man-pages mdocml>=1.13.3") shadow e2fsprogs
+ $(vopt_if btrfs btrfs-progs) $(vopt_if xfs xfsprogs)
+ $(vopt_if f2fs f2fs-tools) $(vopt_if vfat dosfstools)
  psmisc procps-ng tzdata pciutils usbutils iana-etc openssh dhcpcd
- kbd iproute2 iputils iw wpa_supplicant xbps nvi sudo wifi-firmware
- void-artwork traceroute ethtool kmod acpid eudev runit-void"
+ kbd iproute2 iputils $(vopt_if wifi "iw wpa_supplicant wifi-firmware") xbps
+ nvi sudo $(vopt_if art void-artwork) traceroute ethtool kmod acpid eudev runit-void"
 
 case "$XBPS_TARGET_MACHINE" in
 	*-musl) depends+=" musl";;
